@@ -18,8 +18,7 @@ def find_my_ip():
     return ip_address["ip"]
 
 def search_on_wikipedia(query):
-    results = wikipedia.summary(query, sentences=2)
-    return results
+    return wikipedia.summary(query, sentences=2)
 
 def play_on_youtube(video):
     kit.playonyt(video)
@@ -48,12 +47,10 @@ def send_email(receiver_address, subject, message):
         return False
 
 def get_latest_news():
-    news_headlines = []
     res = requests.get(
         f"https://newsapi.org/v2/top-headlines?country=in&apiKey={NEWS_API_KEY}&category=general").json()
     articles = res["articles"]
-    for article in articles:
-        news_headlines.append(article["title"])
+    news_headlines = [article["title"] for article in articles]
     return news_headlines[:5]
 
 def get_weather_report(city):
@@ -65,12 +62,10 @@ def get_weather_report(city):
     return weather, f"{temperature}℃", f"{feels_like}℃"
 
 def get_trending_movies():
-    trending_movies = []
     res = requests.get(
         f"https://api.themoviedb.org/3/trending/movie/day?api_key={TMDB_API_KEY}").json()
     results = res["results"]
-    for r in results:
-        trending_movies.append(r["original_title"])
+    trending_movies = [r["original_title"] for r in results]
     return trending_movies[:5]
 
 def get_random_joke():
